@@ -52269,7 +52269,10 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	angular.module("Banking", []);
+	angular.module("Banking", []).config(["$httpProvider", function($httpProvider) {
+		$httpProvider.defaults.xsrfCookieName = "csrftoken";
+		$httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
+	}]);
 
 	__webpack_require__(9);
 	__webpack_require__(10);
@@ -52286,7 +52289,7 @@
 				console.log("I am inside createAccountController postRequest funtion!!");
 				createAccountService.postRequest($scope.fullName, $scope.fatherName, $scope.motherName, $scope.dob, $scope.gender, $scope.email, $scope.phoneNumber, $scope.panNumber, $scope.panCard, $scope.addressProof, $scope.idProof, $scope.accountType, $scope.startingAmount, function(response) {
 					console.log($scope.idProof);
-					if (response.status == 200) {
+					if (response.status >= 200 && response.status < 300) {
 						console.log("success!");
 						console.log(response);
 					} else {

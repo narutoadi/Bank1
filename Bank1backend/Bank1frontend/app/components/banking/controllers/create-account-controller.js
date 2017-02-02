@@ -6,7 +6,7 @@ angular.module("Banking").controller("createAccountController", ["$scope", "crea
 			console.log("I am inside createAccountController postRequest funtion!!");
 			createAccountService.postRequest($scope.fullName, $scope.fatherName, $scope.motherName, $scope.dob, $scope.gender, $scope.email, $scope.phoneNumber, $scope.panNumber, $scope.panCard, $scope.addressProof, $scope.idProof, $scope.accountType, $scope.startingAmount, function(response) {
 				console.log($scope.idProof);
-				if (response.status == 200) {
+				if (response.status >= 200 && response.status < 300) {
 					console.log("success!");
 					console.log(response);
 				} else {
