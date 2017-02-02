@@ -1,0 +1,69 @@
+	<div class="container">
+		<h1>Fill the following form and click submit!</h1>
+	</div>
+	<!--{"fatherName":["This field is required."],"motherName":["This field is required."],"accountType":["This field is required."],"phoneNumber":["This field is required."],"dob":["This field is required."],"fullName":["This field is required."],"gender":["This field is required."],"addressProof":["No file was submitted."],"email":["This field is required."],"idProof":["No file was submitted."],"panCard":["No file was submitted."]}-->
+	<div class="container">
+		<form >
+			<div class="form-group row">
+			    <label for="FullName" >Full Name</label>
+			    <input type="text" class="form-control" id="FullName" ng-model="fullName" placeholder="Enter your name.">
+			</div>
+			<div class="form-group row">
+			    <label for="FatherName">Father's Name</label>
+			    <input type="text" class="form-control" id="FatherName" ng-model="fatherName" placeholder="Enter your father's name.">
+			</div>
+			<div class="form-group row">
+			    <label for="MotherName">Mother's Name</label>
+			    <input type="text" class="form-control" id="MotherName" ng-model="motherName" placeholder="Enter your mother's name.">
+			</div>
+			<div class="form-group row">
+				<label for="Email">Email address</label>
+				<input type="email" class="form-control" id="email" ng-model="email" placeholder="Enter email">
+			</div>
+			<div class="form-group row">
+				<label for="gender">Gender</label>
+				<select class="form-control" id="gender" ng-model="gender">
+					<option>M</option>
+					<option>F</option>
+				</select>
+			</div>
+			<div class="form-group row"> <!-- Date input -->
+				<label class="control-label" for="date">Date of Birth</label>
+				<input class="form-control" id="dob" name="date" ng-model="dob" placeholder="MM/DD/YYY" type="text"/>
+			</div>
+			<div class="form-group row">
+			    <label for="PhoneNumber">Phone Number</label>
+			    <input type="text" class="form-control" id="PhoneNumber" ng-model="phoneNumber" placeholder="+91xxxxxxxxxx.">
+			</div>
+			<div class="form-group row">
+			    <label for="PanNumber">Pan Number</label>
+			    <input type="text" class="form-control" id="PanNumber" ng-model="panNumber" placeholder="xxxxxxxxx.">
+			</div>
+			<div class="form-group row">
+				<label for="AccoutType">Accout type</label>
+				<select class="form-control" id="AccoutType" ng-model="accountType" >
+					<option>S</option>
+					<option>C</option>
+				</select>
+			</div>
+			<div class="form-group row">
+			    <label for="Starting Amount">Starting Amount</label>
+			    <input type="text" class="form-control" id="Starting Amount" ng-model="startingAmount" >
+			</div>
+	  
+			<div class="form-group row">
+				<label for="AddressProof">Address Proof</label>
+				<input type="file" accept="image/png, image/jpeg, image/gif" class="form-control-file" id="AddressProof" fileread="addressProof" aria-describedby="fileHelp">
+			</div>
+			<div class="form-group row">
+				<label for="IdProof">Id Proof</label>
+				<input type="file" accept="image/png, image/jpeg, image/gif" class="form-control-file" id="IdProof" fileread="idProof" aria-describedby="fileHelp">
+			</div>
+			<div class="form-group row">
+				<label for="Pancard">Pancard</label>
+				<input type="file" accept="image/png, image/jpeg, image/gif" class="form-control-file" id="Pancard" fileread="panCard" aria-describedby="fileHelp">
+			</div>
+	  
+	  <button type="submit" class="btn btn-primary" ng-click="postRequest()">Submit</button>
+	</form>
+	</div>
