@@ -9,6 +9,9 @@ function routesConfig($routeProvider) {
       label: "CreateAccount",
       controller: "createAccountController"
     })
+    .when("/createAccountRequestSuccessful",{ 
+      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/createAccountRequestSuccessful.html",
+    })
     .otherwise({
       templateUrl: _urlPrefixes.TEMPLATES + "404.html"
     });

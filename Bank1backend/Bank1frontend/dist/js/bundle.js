@@ -52281,17 +52281,19 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	angular.module("Banking").controller("createAccountController", ["$scope", "createAccountService",
-			function ($scope, createAccountService) {
+	angular.module("Banking").controller("createAccountController", ["$scope", "$location", "createAccountService",
+			function ($scope, $location, createAccountService) {
 
 			console.log("I am inside createAccountController!!");
 			$scope.postRequest = function(){
 				console.log("I am inside createAccountController postRequest funtion!!");
 				createAccountService.postRequest($scope.fullName, $scope.fatherName, $scope.motherName, $scope.dob, $scope.gender, $scope.email, $scope.phoneNumber, $scope.panNumber, $scope.panCard, $scope.addressProof, $scope.idProof, $scope.accountType, $scope.startingAmount, function(response) {
 					console.log($scope.idProof);
-					if (response.status >= 200 && response.status < 300) {
+					console.log("hu hu ha ha", response.status);
+					if (response.status == "201") {
 						console.log("success!");
 						console.log(response);
+						$location.path("/createAccountRequestSuccessful");
 					} else {
 						console.log("Error!");
 						console.log(response);
@@ -52373,6 +52375,9 @@
 	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/createAccount.html",
 	      label: "CreateAccount",
 	      controller: "createAccountController"
+	    })
+	    .when("/createAccountRequestSuccessful",{ 
+	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/createAccountRequestSuccessful.html",
 	    })
 	    .otherwise({
 	      templateUrl: _urlPrefixes.TEMPLATES + "404.html"

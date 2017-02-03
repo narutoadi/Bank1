@@ -20,16 +20,24 @@ class AccountRequestSerializer(serializers.Serializer):
 	gender = serializers.ChoiceField(choices=GENDER_CHOICES,required=True);
 	email = serializers.EmailField(required=True);
 	phoneNumber = serializers.CharField(max_length=16,validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format '+9999999'. Upto 15 digits are allowed.")])
-	panNumber = serializers.IntegerField(required=True);
+	panNumber = serializers.CharField(max_length=10, required=True);
 	accountType = serializers.ChoiceField(choices=ACCOUNT_CHOICES,required=True);
 	startingAmount = serializers.IntegerField(required=True);
 	addressProof = Base64ImageField(required=True);
 	idProof = Base64ImageField(required=True);
 	panCard = Base64ImageField(required=True);
-
 	def create(self, validated_data):
+		print (validated_data)
 		return AccountRequest.objects.create(**validated_data)
 	
+class FormStatusSerializer(ModelSerializer):
+	class Meta:
+		model = AccountRequest
+		fields = [
+			'formNumber',
+			'formStatus',
+			'panNumber',
+		]
 
 class CreditCardRequestSerializer(ModelSerializer):
 	class Meta:
