@@ -1,6 +1,7 @@
 angular.module("Banking").controller("createAccountController", ["$scope", "$location", "createAccountService",
 		function ($scope, $location, createAccountService) {
 
+		$scope.FormSubmitted=false;
 		console.log("I am inside createAccountController!!");
 		$scope.postRequest = function(){
 			console.log("I am inside createAccountController postRequest funtion!!");
@@ -8,6 +9,7 @@ angular.module("Banking").controller("createAccountController", ["$scope", "$loc
 				console.log($scope.idProof);
 				console.log("hu hu ha ha", response.status);
 				if (response.status == "201") {
+					$scope.FormSubmitted=true;
 					console.log("success!");
 					console.log(response);
 					$location.path("/createAccountRequestSuccessful");

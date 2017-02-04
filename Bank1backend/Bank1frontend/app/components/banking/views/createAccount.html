@@ -1,3 +1,4 @@
+<div ng-hide="FormSubmitted">	
 	<div class="container">
 		<h1>Fill the following form and click submit!</h1>
 	</div>
@@ -67,3 +68,8 @@
 	  <button type="submit" class="btn btn-primary" ng-click="postRequest()">Submit</button>
 	</form>
 	</div>
+</div>
+
+<div class="contianer" ng-show="FormSubmitted">
+	Form submitted successfully!
+</div>

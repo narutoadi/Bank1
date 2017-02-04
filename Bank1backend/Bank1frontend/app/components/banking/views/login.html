@@ -1,0 +1,14 @@
+<div class="container">
+	<h3>Login with your pan Number and password!</h3>
+	<form>
+		<div class="form-group row">
+		    <label for="panNumber">Pan Number</label>
+		    <input type="text" class="form-control" id="loginpanNo" ng-model="loginPanNo" placeholder="Enter your pan number.">
+		</div>		
+		<div class="form-group row">
+		    <label for="password">Password</label>
+		    <input type="password" class="form-control" id="loginpass" ng-model="loginPassword" >
+		</div>
+		<button type="submit" class="btn btn-primary" ng-click="postRequest()">Submit</button>
+	</form>
+</div>

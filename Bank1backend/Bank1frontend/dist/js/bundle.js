@@ -52276,6 +52276,8 @@
 
 	__webpack_require__(9);
 	__webpack_require__(10);
+	__webpack_require__(12);
+	__webpack_require__(13);
 
 /***/ },
 /* 9 */
@@ -52284,6 +52286,7 @@
 	angular.module("Banking").controller("createAccountController", ["$scope", "$location", "createAccountService",
 			function ($scope, $location, createAccountService) {
 
+			$scope.FormSubmitted=false;
 			console.log("I am inside createAccountController!!");
 			$scope.postRequest = function(){
 				console.log("I am inside createAccountController postRequest funtion!!");
@@ -52291,6 +52294,7 @@
 					console.log($scope.idProof);
 					console.log("hu hu ha ha", response.status);
 					if (response.status == "201") {
+						$scope.FormSubmitted=true;
 						console.log("success!");
 						console.log(response);
 						$location.path("/createAccountRequestSuccessful");
@@ -52369,15 +52373,23 @@
 	  $routeProvider
 	    .when("/", {
 	      templateUrl: _urlPrefixes.TEMPLATES + "components/home/home.html",
-	      label: "Home"
+	      label: "Home",
+	      controller: "HomeController",
 	    })
 	    .when("/createAccount",{
 	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/createAccount.html",
 	      label: "CreateAccount",
-	      controller: "createAccountController"
+	      controller: "createAccountController",
 	    })
-	    .when("/createAccountRequestSuccessful",{ 
-	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/createAccountRequestSuccessful.html",
+	    .when("/formStatus",{
+	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/formStatus.html",
+	      controller: "formStatusController",
+	    })
+	    .when("/creditCard",{
+	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/creditCard.html",
+	    })
+	    .when("/login",{
+	      templateUrl: _urlPrefixes.TEMPLATES+ "components/banking/views/login.html",
 	    })
 	    .otherwise({
 	      templateUrl: _urlPrefixes.TEMPLATES + "404.html"
@@ -52387,6 +52399,69 @@
 	routesConfig.$inject = ["$routeProvider"];
 
 	module.exports = routesConfig; 
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	angular.module("Banking").controller("formStatusController", ["$scope", "$location", "formStatusService",
+			function ($scope, $location, formStatusService) {
+			console.log("I am inside formStatusController!!");
+				$scope.FormSubmitted=false;
+				$scope.FormNo;
+				$scope.getStatus = function(){
+				console.log("I am inside formStatusController getStatus funtion!!");
+				formStatusService.getStatus($scope.statusPanNo, function(response) {
+					
+					console.log("hu hu ha ha", response.status);
+					if (response.status == "201" || response.status == "200") {
+						$scope.FormNo=response.data.formNumber;
+						if(response.data.formStatus=="RP"){
+							$scope.FormStatus="Request Pending!";
+						}
+						if(response.data.formStatus=="VF"){
+							$scope.FormStatus="Verified but found false!";
+						}
+						if(response.data.formStatus=="VT"){
+							$scope.FormStatus="Verified and found true!";
+						}
+						if(response.data.formStatus=="AC"){
+							$scope.FormStatus="Account Created!";
+						}
+						$scope.FormSubmitted=true;
+						console.log("success!");
+						console.log(response);
+					} else {
+						console.log("Error!");
+						console.log(response);
+					}
+				});
+			};
+		}]);
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	var app = angular.module("Banking");
+	app.service("formStatusService", ["$http", function ($http) {
+
+	        console.log("I am inside formStatusService funtion!!");
+	    this.getStatus = function ( panNumber, callback) {
+	        
+	        $http({
+	            method: "GET",
+	            url: "api/banking/FormStatus/get/"+panNumber+"/",
+	            headers: {
+	                "Content-Type": "application/json"
+	            },
+	        }).then(function success(response) {
+	            callback(response);
+	        }, function error(response) {
+	            callback(response);
+	        });
+	    };
+	}]);
 
 /***/ }
 /******/ ]);

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from django.core.validators import RegexValidator
-from banking.models import AccountRequest, CreditCardRequest
+from banking.models import AccountRequest, CreditCardRequest, DebitCard
 from drf_extra_fields.fields import Base64ImageField
 
 class AccountRequestSerializer(serializers.Serializer):
@@ -56,5 +56,19 @@ class CreditCardRequestSerializer(ModelSerializer):
 			'panCard',
 			'incomeProof',
 			'cardType',
+		]
+
+class DebitCardSerializer(ModelSerializer):
+	class Meta:
+		model = DebitCard
+		fields = [
+			'debitCardNumber',
+			'validFromMonth',
+			'validFromYear',
+			'validThruMonth',
+			'validThruYear',
+			'lottNo',
+			'cvv',
+			'pin',
 		]
 

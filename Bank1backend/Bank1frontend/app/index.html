@@ -5,10 +5,27 @@
     <title>My Site</title>
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
     <script src="{% static 'dist/js/bundle.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
     <base href="/">
   </head>
   <body>
+  <nav class="navbar navbar-inverse bg-primary">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Bank1</a>
+      </div>
+    <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+      <li><a href="#!/createAccount">Create Account!</a></li>
+      <li><a href="#!/formStatus">Form Status</a></li>
+      <li><a>Get a credit card!</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#!/login">Login</a></li>
+    </ul>
+  </div>
+</nav>
   	<div ng-view></div>
   </body>
 </html>  

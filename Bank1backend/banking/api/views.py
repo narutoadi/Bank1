@@ -1,13 +1,16 @@
 from banking.models import (
 	AccountRequest, 
 	CreditCardRequest,
+	DebitCard,
 	)
 from banking.api.serializers import (
 	AccountRequestSerializer,
 	CreditCardRequestSerializer,
 	FormStatusSerializer,
+	DebitCardSerializer,
 	)
 from rest_framework import generics
+from rest_framework.views import APIView
 from rest_framework.permissions import (
 	AllowAny,
 	IsAuthenticated,
@@ -29,7 +32,7 @@ class FormStatusAPIView(generics.RetrieveAPIView):
 	queryset = AccountRequest.objects.all()
 	serializer_class = FormStatusSerializer
 	permission_classes = [AllowAny]
-	lookup_field = 'formNumber'
+	lookup_field = 'panNumber'
 
 class AccountRequestListAPIView(generics.ListAPIView):
 	queryset = AccountRequest.objects.all()
@@ -40,3 +43,4 @@ class CreditCardRequestListAPIView(generics.ListAPIView):
 	queryset = CreditCardRequest.objects.all()
 	serializer_class = CreditCardRequestSerializer
 	## customize permissions so that only bank employee can see 
+

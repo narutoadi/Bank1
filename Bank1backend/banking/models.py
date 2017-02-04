@@ -74,9 +74,21 @@ class BankDetails(models.Model):
 	accountsCount = models.IntegerField()
 	creditCardCount = models.IntegerField()
 
+class DebitCard(models.Model):
+	debitCardNumber = models.CharField(max_length=16,unique=True)
+	validFromMonth = models.IntegerField()
+	validFromYear = models.IntegerField()
+	validThruMonth = models.IntegerField()
+	validThruYear = models.IntegerField()
+	lottNo = models.IntegerField()
+	cvv = models.CharField(max_length=3)
+	pin = models.CharField(max_length=4) #use salt and hash for this field
+	def __str__(self):
+		return self.debitCardNumber
+
 class Account(models.Model):
 	accountNumber = models.IntegerField(primary_key=True)
 	formNumber = models.OneToOneField(AccountRequest)
-	debitCardNumber = models.IntegerField()
+	debitCardNumber = models.OneToOneField(DebitCard)
 	amount = models.IntegerField()
 

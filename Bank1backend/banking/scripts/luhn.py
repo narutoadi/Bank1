@@ -6,7 +6,7 @@ def luhn( s ):
 			sum = sum + int(s[i])
 		else:
 			sq = int(s[i]) * int(s[i])
-			sum = sum + sq%10 + sq/10
+			sum = sum + int(sq%10) + int(sq/10)
 
 	if sum%10 == 0:
 		return '0'

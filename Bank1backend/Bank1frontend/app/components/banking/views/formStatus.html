@@ -1,0 +1,15 @@
+
+<div class="container" ng-hide="FormSubmitted">
+	<h3>Use pan number to check your form status!</h3>	
+	<form>
+		<div class="form-group row">
+		    <label for="panNumber">Pan Number</label>
+		    <input type="text" class="form-control" id="statuspanNo" ng-model="statusPanNo" placeholder="Enter your pan number.">
+		</div>
+		<button type="submit" class="btn btn-primary" ng-click="getStatus()">Submit</button>
+	</form>
+</div>
+<div class="container" ng-show="FormSubmitted">
+	<h4>Form Number : {{ FormNo }}</h4>
+	<h4>Form Status: {{ FormStatus }}</h4>
+</div>

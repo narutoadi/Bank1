@@ -5,3 +5,5 @@ angular.module("Banking", []).config(["$httpProvider", function($httpProvider) {
 
 require("./controllers/create-account-controller");
 require("./services/create-account-service");
+require("./controllers/form-status-controller");
+require("./services/form-status-service");
