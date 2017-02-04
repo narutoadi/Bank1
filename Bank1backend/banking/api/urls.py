@@ -8,6 +8,7 @@ from .views import (
 	CreditCardRequestListAPIView,
 	FormStatusAPIView,
 	)
+from . import views
 
 urlpatterns = [
 	url(r'^AccountRequest/post/$', AccountRequestCreateAPIView.as_view(), name='createAccountRequest'),
@@ -15,4 +16,5 @@ urlpatterns = [
 	url(r'^CreditCardRequest/post/$', CreditCardRequestCreateAPIView.as_view(), name='createCreditCardRequest'),
 	url(r'^AccountRequest/get/$', AccountRequestListAPIView.as_view(), name='createAccountRequest'),
 	url(r'^CreditCardRequest/get/$', CreditCardRequestListAPIView.as_view(), name='createCreditCardRequest'),
+	url(r'^isPossible/(?P<dcNum>[\w]+)/(?P<vtm>[\d]+)/(?P<vty>[\d]+)/(?P<cvv>[\w]+)/$', views.isTransactionPossible, name='isPossible'),
 ]

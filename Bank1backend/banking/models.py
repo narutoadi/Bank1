@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from PIL import Image
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+from django.conf import settings
+
+# This code is triggered whenever a new user has been created and saved to the database
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 # Create your models here.
 
 class AccountRequest(models.Model):
@@ -87,7 +98,7 @@ class DebitCard(models.Model):
 		return self.debitCardNumber
 
 class Account(models.Model):
-	accountNumber = models.IntegerField(primary_key=True)
+	accountNumber = models.CharField(max_length=11,primary_key=True)
 	formNumber = models.OneToOneField(AccountRequest)
 	debitCardNumber = models.OneToOneField(DebitCard)
 	amount = models.IntegerField()
